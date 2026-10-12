@@ -990,7 +990,7 @@ I open Splunk Enterprise → Search & Reporting.
 
 After running the SPL query,\
 \
-The Sigma Detection Engineering Lab — Windows Failed Password Logon Detection has 8 main steps.\
+The Sigma Detection Engineering Lab — Windows Failed Password Logon Detection has 8 main steps.
 \
 The Splunk Enterprise output confirm successful execution of the adapted Sigma detection logic against the Windows 11 VM authentication logs.
 
@@ -1012,8 +1012,8 @@ The Splunk Enterprise output confirm successful execution of the adapted Sigma d
 
 ### **SOC Analysis**
 
-The detection identified 12 failed authentication events associated with the Window 11 VM\
-\
+The detection identified 12 failed authentication events associated with the Window 11 VM.
+
 Event ID 4625: Failed Windows authentication.
 
 - Status 0xC000006D: Logon failure.
@@ -1028,13 +1028,13 @@ The results demonstrate successful identification of incorrect-password authenti
 
 The detection was validated using an adapted SPL query because the imported XML dataset requires field extraction. Direct execution of the original Sigma-generated SPL remains a separate validation task. (Images 38. 39, and 40)
 
-### Step 6 — Authentication Failure Investigation\
+### Step 6 — Authentication Failure Investigation
 \
 The next objective is to determine the frequency and distribution of failed authentication attempts.
 
-In Splunk Search & Reporting, I execute the SPL query.\
+In Splunk Search & Reporting, I execute the SPL query.
 \
-After I am running the query:\
+After I am running the query:
 \
 index=main sourcetype=windows_security_xml "4625"\
 \| rex field=\_raw "\<Data Name=\\TargetUserName\\\>(?\<Account_Name\>\[^\<\]\*)\</Data\>"\
@@ -1116,7 +1116,7 @@ The next objective is to reduce alerts associated with known laboratory activity
 
 For this controlled lab, I exclude the loopback address from the threshold-based detection.
 
-In Splunk Enterprise, I replace the previous query with: (Image 45)
+In Splunk Enterprise, I replace the previous query with: (Image 44)
 
 After I run the query:
 
@@ -1166,7 +1166,7 @@ The tuned query excluded loopback activity and retained two authentication event
 \
 **Result:** A 100% reduction in threshold-matching groups for the tested dataset.
 
-This demonstrates successful laboratory false-positive tuning. However, the exclusion is appropriate only for the controlled test scenario. Production environments require further validation because malicious authentication attempts can also originate locally. (Image 46)
+This demonstrates successful laboratory false-positive tuning. However, the exclusion is appropriate only for the controlled test scenario. Production environments require further validation because malicious authentication attempts can also originate locally. (Image 45)
 
 # Step 8 — Final SOC Investigation Report and 
 
