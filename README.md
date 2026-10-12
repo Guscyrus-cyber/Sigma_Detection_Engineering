@@ -2,18 +2,18 @@
 
 ## Windows Brute-Force Detection Using Sigma Rules and Splunk Enterprise
 
-### Introduction\
-This Hands-in-practice lab has two parts:\
-1. Tools need for this project lab\
+### Introduction
+This Hands-in-practice lab has two parts:
+1. Tools need for this project lab
 2. The actual practical lab
 
-This hands-on cybersecurity lab focuses on **Sigma Detection Engineering**, a fundamental skill used by SOC Analysts and Detection Engineers to identify suspicious activities, develop detection rules, and investigate potential security threats.
+This hands-on cybersecurity lab focuses on Sigma Detection Engineering, a fundamental skill used by SOC Analysts and Detection Engineers to identify suspicious activities, develop detection rules, and investigate potential security threats.
 
-The primary objective is to develop, validate, and test Sigma detection rules for identifying Windows brute-force authentication attempts using **Windows Security Event ID 4625 (Failed Logon)**. The investigation uses Windows 11 security-event logs previously generated during a controlled brute-force simulation and ingested into Splunk Enterprise.
+The primary objective is to develop, validate, and test Sigma detection rules for identifying Windows brute-force authentication attempts using Windows Security Event ID 4625 (Failed Logon). The investigation uses Windows 11 security-event logs previously generated during a controlled brute-force simulation and ingested into Splunk Enterprise.
 
 ### Lab Environment and Tool Preparation
 
-Before beginning the practical detection-engineering exercises, the required tools were downloaded, installed, and configured through the **macOS Terminal on a MacBook Pro**.
+Before beginning the practical detection-engineering exercises, the required tools were downloaded, installed, and configured through the macOS Terminal on a MacBook Pro.
 
 The preparation included:
 
@@ -49,9 +49,7 @@ The project focuses on developing practical SOC detection-engineering capabiliti
 
 6.  Documenting technical findings, detection evidence, and incident response procedures.
 
-**Expected Outcome:** A tested, documented, and reproducible Sigma detection-engineering project demonstrating practical threat detection, security-log analysis, and SOC investigation skills.
-
-**Step 1 —** **Tools needed for Project **
+### Step 1 — Tools needed for Project 
 
 <table style="width:99%;">
 <colgroup>
@@ -123,25 +121,15 @@ Sysmon</td>
 
 No additional Windows VM is required for this project. The existing Windows environment can be reused.
 
-**Step 2 —** **Pre-installation check **
+### Step 2 - Pre-installation check 
 
 Before downloading anything, I check the tools already installed. This avoids duplicate installations and unnecessary storage usage.
 
 I open Terminal on the MacBook Pro, copy the following commands, and I press Enter:\
-\
+
 (Images 1, 2, and 3)
 
-\
-\
-\
-**\
-\
-\
-\
-\**
-**\
-\
-Step 3 —** **What happens after **
+### Step 3 —What happens after 
 ----------------------------------
 
 After reviewing the Terminal output, the installation will proceed in this order:
@@ -192,15 +180,9 @@ pipx --version
 The first command downloads and installs pipx. The second configures the executable search \
 path. A new Terminal session may be necessary before the command becomes available.
 
-After verifying pipx, the next step will be installing Sigma CLI and the Splunk backend. \
-\
+After verifying pipx, the next step will be installing Sigma CLI and the Splunk backend. 
+
 (Images 4 and 5)
-
-(Top of Form
-
-Bottom of Form
-
-\
 
 The Terminal output confirms:
 
@@ -212,7 +194,7 @@ The Terminal output confirms:
 | Python dependencies   | Installed     |
 | Installation errors   | None reported |
 
-\
+
 Install Sigma CLI
 -----------------
 
@@ -235,10 +217,6 @@ sigma --version
 Important: I do not install the Splunk backend yet. The next step will be configuring the Sigma CLI plugins \
 needed for Splunk. (Images 6, 7, and 8)
 
-\
-\
-\
-\
 Step 3A — Reinstall Sigma CLI using Python 3.12
 -----------------------------------------------
 
@@ -259,41 +237,6 @@ sigma --version
 This approach keeps Sigma CLI isolated from other Python packages and avoids changing the \
 system's default Python installation. (Image 9 and 10)
 
-Top of Form
-
-Bottom of Form
-
-\
-
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
 Step 3B — Verify Sigma CLI
 --------------------------
 
@@ -323,37 +266,6 @@ This should confirm that sigma-cli 3.1.0 is installed under Python 3.1
 After confirmation, the next step will be installing the Sigma Splunk backend so that Sigma \
 YAML detection rules can be converted into Splunk SPL searches. (Image 11)
 
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
 Step 4 — Install the Sigma Splunk Backend
 -----------------------------------------
 
@@ -389,26 +301,6 @@ The output confirms:
 
 The Sigma environment can now convert supported detection rules into Splunk searches. (Image 12)
 
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
 Step 5 — Download the official SigmaHQ repository
 -------------------------------------------------
 
@@ -417,7 +309,7 @@ platforms.
 
 These rules will serve as references when developing original detection logic for the project.
 
-### I execute the following commands in Terminal
+I execute the following commands in Terminal
 
 First, I create a dedicated directory for Sigma tools:
 
@@ -437,10 +329,6 @@ The expected output should include directories such as rules and other
 
 Afterward, I will verify the downloaded rules, and I check the remaining available storage, and I confirm the existing Splunk environment.
 
-Top of Form
-
-Bottom of Form
-
 The output confirms:
 
 | **Component**             | **Status**        |
@@ -454,8 +342,6 @@ The output confirms:
 
 (Image 13)
 
-\
-\
 Step 6 — Verify Sigma rules and available storage
 -------------------------------------------------
 
@@ -500,8 +386,6 @@ These can serve as references for the first detection-engineering scena
 
 (Image 14)
 
-\
-\
 Step 7 — Verify Sigma-to-Splunk conversion
 ------------------------------------------
 
@@ -539,10 +423,6 @@ formats used by a specific SIEM platform.
 For example, a Windows authentication rule may reference EventID, while a particular Splunk \
 data source may require different field mappings. (Image 15)
 
-\
-\
-\
-\
 Step 7A — Identify available Splunk pipelines
 ---------------------------------------------
 
@@ -567,15 +447,9 @@ The output confirms three available pipelines:
 | splunk_sysmon_acceleration | Windows Sysmon events                 |
 | splunk_cim                 | Splunk Common Information Model (CIM) |
 
-For the first detection scenario, Windows Event ID 4625 — Failed Logon, I will start with \
+For the first detection scenario, Windows Event ID 4625 — Failed Logon, I will start with 
 splunk_windows. (Image 16)
 
-\
--
-
-\
-\
-\
 Step 7B — Convert a Sigma rule into Splunk SPL
 ----------------------------------------------
 
@@ -621,9 +495,6 @@ The generated query includes:
 Important: This particular SigmaHQ rule detects selected suspicious authentication failure \
 reasons. It is not yet a complete brute-force correlation rule. (Image 17)
 
-\
-\
-\
 Step 8 — Verify Splunk Enterprise
 ---------------------------------
 
@@ -738,7 +609,6 @@ The search returned 25 events from the window index.
 | Failure_Reason     | Account Disabled            |
 | src_ip             | Present in raw events       |
 
-### \
 Important discovery
 
 The dataset contains \
@@ -754,15 +624,6 @@ For example:
 This is a realistic detection-engineering challenge: a detection rule can be syntactically correct but fail to identify threats \
 because the SIEM field mappings do not match the ingested telemetry. (Image 19 and 20)
 
-\
-\
-\
-\
-\
-\
-\
-\
-\
 Step 11 — Verify extracted fields in Splunk
 -------------------------------------------
 
@@ -797,9 +658,6 @@ All 25 events are searchable, and the first 10 are displayed correctl
 
 Important finding: The existing dataset is suitable for investigating disabled-account authentication attempts. However, field mapping will be necessary before testing Sigma rules designed for standard Windows authentication logs. (Image 21)
 
-\
-\
-\
 Step 12 — Check for the original brute-force dataset
 ----------------------------------------------------
 
@@ -836,8 +694,6 @@ brute-force investigation.
 
 I have located the likely data source, but still need to confirm the event structure before beginning detection engineering. (Image 22)
 
-\
-\
 Step 13 — Inspect the original Windows 11 security logs
 -------------------------------------------------------
 
@@ -890,8 +746,8 @@ The five displayed events occurred on September 23, 2026, between appr
 
 These records are consistent with the earlier controlled brute-force simulation involving repeated incorrect passwords.
 
-### Important: Five failed logons establish suspicious-pattern test data, but do not independently prove a real-world attack.\
-\
+Important: Five failed logons establish suspicious-pattern test data, but do not independently prove a real-world attack.
+
 Data Sources and Collection
 
 This Sigma Detection Engineering project utilizes security-event data collected from previous hands-on SOC investigations, supplemented by open-source Sigma detection rules.
@@ -926,39 +782,26 @@ These datasets support detection testing, event correlation, investigation, and 
 
 The objective is to develop an original Sigma detection rule, convert the rule into executable Splunk SPL, validate detection results against existing Windows security events, investigate suspicious authentication behavior, and document findings using SOC detection-engineering practices.
 
-\
-\
-
-\
-\
-\
-\
-\
-\
-\
-\
 Project — Preparation checklist
 -------------------------------
 
 | **Component**                     | **Status** |
 |-----------------------------------|------------|
-| Python and pipx √                 |            |
-| Sigma CLI √                       |            |
-| Sigma Splunk backend √            |            |
-| SigmaHQ repository √              |            |
-| Sigma-to-SPL conversion √         |            |
-| Splunk Enterprise √               |            |
-| Windows Event ID 4625 telemetry √ |            |
-| Original brute-force events √     |            |
+| Python and pipx                  |      √       |
+| Sigma CLI                       |       √      |
+| Sigma Splunk backend             |      √      |
+| SigmaHQ repository               |      √      |
+| Sigma-to-SPL conversion          |      √     |
+| Splunk Enterprise                |      √      |
+| Windows Event ID 4625 telemetry  |      √      |
+| Original brute-force events      |      √      |
 
 Environment preparation. Completed\
 \
 The XML fields are present in the raw records. Whether Splunk automatically extracts all \
 necessary fields remain to be tested during the actual lab.
 
-—————————————————————————\
-**Project Lab— Sigma Detection Engineering**
-============================================
+### Project Lab— Sigma Detection Engineering
 
 Sigma Detection Engineering — Windows Brute-Force Detection (Event ID 4625)
 
@@ -1002,10 +845,8 @@ I open Splunk Enterprise → Search & Reporting.
 
 I execute the following SPL query: (Image 28)
 
-### \
-\
 File name: 01_Windows_4625_Telemetry_Baseline.png\
-\
+
 
 | **Field**         | **Result**           |
 |-------------------|----------------------|
@@ -1019,10 +860,6 @@ File name: 01_Windows_4625_Telemetry_Baseline.png\
 
 Finding: Splunk successfully retrieved 13 Windows Security XML events containing 4625. Exact Event ID verification remains necessary before classifying every match as a failed-logon event. (Image 29)
 
-\
-\
-\
-\
 Step 2 — Extract Windows Authentication Fields
 ----------------------------------------------
 
@@ -1049,7 +886,7 @@ After using the SPL query, and I run it:\
 \
 The Splunk output confirm successful extraction of Windows authentication-failure fields from the original Windows 11 VM security logs.
 
-## 
+
 
 | **Field**          | **Observed result**      |
 |--------------------|--------------------------|
@@ -1063,7 +900,7 @@ The Splunk output confirm successful extraction of Windows authentication-failur
 | Source IP          | 127.0.0.1 or unavailable |
 | Observation period | September 22–24, 2026    |
 
-### \
+
 Security analysis
 
 - Status 0xC000006D: Authentication failure.
@@ -1080,44 +917,6 @@ Preliminary classification: Lab-generated repeated authentication failures cons
 
 The final event has missing extracted fields. Additional validation may be necessary before including the event in account-based correlation. (Image 30 and 31)
 
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
 Step 3 — Custom Sigma Detection Rule Development
 ------------------------------------------------
 
@@ -1132,22 +931,8 @@ Visual Studio Code open a new YAML file.
 
 ### I copy the following detection rule into the file: windows_failed_password_logon.yml\
 Then I save it. (Image 32 through 35)\
-\
 
-\
-\
-\
-\
-\
-
-### \
-\
-\
-\
-\
-\
-\
-Step 4 — Sigma YAML Rule Validation
+### Step 4 — Sigma YAML Rule Validation
 
 Objective: Validate the custom Sigma detection rule for YAML syntax, required Sigma fields, and compatibility with the installed Sigma CLI.
 
@@ -1156,9 +941,9 @@ Tool: Sigma CLI 3.1.0 — macOS Terminal
 ### 4.1— Verify the Sigma rule file
 
 - I open macOS Terminal and execute: ls -l ~/SOC-Tools/Sigma-Detection-Lab/rules/\
-  \
+
   The Terminal screenshot confirms:\
-  \
+
   Sigma rule: windows_failed_password_logon.yml
 
 - Location: ~/SOC-Tools/Sigma-Detection-Lab/rules/
@@ -1167,10 +952,7 @@ Tool: Sigma CLI 3.1.0 — macOS Terminal
 
 - Status: File exists and is ready for validation. (Image 36)
 
-### \
-\
-\
-4.2 — Validate the Sigma rule
+### 4.2 — Validate the Sigma rule
 
 I execute:\
 sigma convert -t splunk -p splunk_windows ~/SOC-Tools/Sigma-Detection-Lab/rules/windows_failed_password_logon.yml\
@@ -1200,10 +982,7 @@ source="WinEventLog:Security" EventCode=4625 Status="0xc000006D" SubStatus="0xc0
 
 (Image 37)
 
-### \
-\
-\
-Step 5 — Test the Sigma Detection Rule in Splunk Enterprise
+### Step 5 — Test the Sigma Detection Rule in Splunk Enterprise
 
 The existing Windows 11 VM dataset contains 13 failed-logon events. However, the imported XML events use different field extraction and source naming from the generated Sigma query.
 
@@ -1249,13 +1028,7 @@ The results demonstrate successful identification of incorrect-password authenti
 
 The detection was validated using an adapted SPL query because the imported XML dataset requires field extraction. Direct execution of the original Sigma-generated SPL remains a separate validation task. (Images 38. 39, and 40)
 
-\
-\
-\
-\
-\
-\
-Step 6 — Authentication Failure Investigation\
+### Step 6 — Authentication Failure Investigation\
 \
 The next objective is to determine the frequency and distribution of failed authentication attempts.
 
@@ -1289,7 +1062,6 @@ The Splunk Enterprise output confirms successful execution of the authentication
 | Authentication failure              | Incorrect password |
 | Windows Event ID                    | 4625               |
 
-### \
 SOC Investigation Findings
 
 The investigation identified 12 failed authentication attempts associated with the Windows 11 virtual machine.
@@ -1300,11 +1072,7 @@ The authentication failures occurred across two days. The available evidence is 
 
 Detection assessment: Successful identification of repeated incorrect-password attempts. No evidence of an external brute-force attack has been established. (Image 41)
 
-### \
-\
-\
-\
-Step 7 — False-Positive Analysis and Detection Tuning
+### Step 7 — False-Positive Analysis and Detection Tuning
 
 The next objective is to demonstrate an important detection engineering skill: distinguishing suspicious authentication activity from expected laboratory activity.
 
@@ -1314,9 +1082,6 @@ Step 7.1 — Identify repeated authentication failures within a five-minute wind
 
 I execute the following SPL in Splunk Enterprise: (Image 42)
 
-\
-\
-\
 Detection threshold: Three or more incorrect-password failures within the same five-minute time bucket, grouped by host, account, and source IP.
 
 This threshold is for laboratory evaluation, not a production-ready brute-force detection. The five-minute buckets are fixed rather than rolling windows.
@@ -1336,7 +1101,6 @@ The Splunk output confirms successful execution of the five-minute authenticatio
 | Total threshold-matching events | 9                               |
 | Threshold-matching time buckets | 2                               |
 
-### \
 **SOC Analysis**
 
 The detection identified two clusters of repeated failed-password attempts.
@@ -1345,8 +1109,6 @@ Both clusters exceeded the configured threshold. However, the source address 12
 
 **Finding:** The detection successfully identified repeated authentication failures, but the threshold matches do not establish a genuine brute-force attack. (Image 43)
 
-\
-\
 Step 7.2 — False-Positive Tuning
 --------------------------------
 
@@ -1356,12 +1118,10 @@ For this controlled lab, I exclude the loopback address from the threshold-based
 
 In Splunk Enterprise, I replace the previous query with: (Image 45)
 
-\
-\
-After I run the query:\
-\
+After I run the query:
+
 The output shows “No results found,” but that is the expected outcome.\
-\
+
 The purpose is to test whether false-positive tuning could eliminate alerts associated with known laboratory activity.
 
 ### Why Splunk returned no results
@@ -1424,7 +1184,7 @@ The project addresses three important SOC and detection engineering competencies
 
 - Converting Sigma YAML detection logic into Splunk SPL and validating the logic against Windows Security logs.
 
-\
+
 Final SOC Investigation Report
 ------------------------------
 
@@ -1441,7 +1201,6 @@ CASE SUMMARY
 | After tuning              | 0 groups                       |
 | Final classification      | Authorized laboratory activity |
 
-### \
 Executive Summary
 
 A custom Sigma detection rule was developed to identify Windows failed authentication events associated with incorrect passwords. The Sigma CLI successfully converted the YAML rule into Splunk Search Processing Language (SPL).
